@@ -15,10 +15,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @SpringBootApplication
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class CertificateBasedAuthenticationServerApplication extends WebSecurityConfigurerAdapter {
+public class CertificateBasedAuthenticationApplication extends WebSecurityConfigurerAdapter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CertificateBasedAuthenticationServerApplication.class, args);
+		SpringApplication.run(CertificateBasedAuthenticationApplication.class, args);
 	}
 
 	@Override
