@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 
@@ -17,5 +19,14 @@ public class HomeController {
         UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
         model.addAttribute("username", currentUser.getUsername());
         return "home";
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public RedirectView login(Model model, Principal principal) {
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("pnnl://login?username="+currentUser.getUsername());
+        return redirectView;
     }
 }
